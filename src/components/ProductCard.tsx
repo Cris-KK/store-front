@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -54,6 +53,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
       console.log('首页直接购买创建的订单ID:', orderId);
       
       if (!orderId) {
+        throw new Error('订单创建失败');
         throw new Error('订单创建失败');
       }
       
@@ -133,11 +133,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
         {product.sales && (
           <p className="text-xs text-gray-500 mb-2">已售{product.sales}件</p>
         )}
-        <div className="flex space-x-2">
+        <div className="flex gap-2 mt-1">
           <Button
             variant="outline"
             size="sm"
-            className="flex-1 text-xs h-7"
+            className="w-1/2 text-xs h-7"
             onClick={handleAddToCart}
           >
             <ShoppingCart className="w-3 h-3 mr-1" />
@@ -145,7 +145,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
           </Button>
           <Button
             size="sm"
-            className="flex-1 text-xs h-7"
+            className="w-1/2 text-xs h-7"
             onClick={handleBuyNow}
           >
             立即购买
