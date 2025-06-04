@@ -68,11 +68,7 @@ const Login = () => {
                 />
               </div>
 
-              <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
-                <p className="font-medium mb-1">测试账号：</p>
-                <p>管理员：admin@mall.com / admin123</p>
-                <p>注意：请先注册账号才能登录</p>
-              </div>
+         
             </CardContent>
             
             <CardFooter className="flex flex-col space-y-4">
