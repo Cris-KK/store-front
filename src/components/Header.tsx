@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Search, ShoppingCart, User, LogOut, Menu } from 'lucide-react';
+import { Search, ShoppingCart, User, LogOut, Menu, MessageCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/hooks/useCart';
 import {
@@ -32,7 +32,7 @@ const Header = () => {
       //navigate(`/category/all?search=${encodeURIComponent(searchQuery)}`);
       navigate(`/category/all?search=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery(''); // 清空搜索框
-      
+
     }
   };
 
@@ -61,14 +61,9 @@ const Header = () => {
           {/* Right Icons - 移动端简化 */}
           <div className="flex items-center space-x-1 flex-shrink-0">
             {/* Shopping Cart */}
-            <Link to="/cart">
+            <Link to="/customer-service">
               <Button variant="ghost" size="sm" className="relative p-2">
-                <ShoppingCart className="w-4 h-4" />
-                {cartCount > 0 && (
-                  <Badge className="absolute -top-1 -right-1 w-4 h-4 rounded-full p-0 flex items-center justify-center text-xs">
-                    {cartCount > 99 ? '99+' : cartCount}
-                  </Badge>
-                )}
+                <MessageCircle className="w-4 h-4" />
               </Button>
             </Link>
 

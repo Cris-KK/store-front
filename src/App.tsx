@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import Checkout from "./pages/Checkout";
 import Order from "./pages/Order";
 import Category from "./pages/Category";
+import CustomerService from './pages/CustomerService';
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminOrders from "./pages/admin/AdminOrders";
@@ -48,6 +49,7 @@ const App: React.FC = () => {
               <Route path="/product/:id" element={<Product />} />
               <Route path="/category/:category" element={<Category />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/customer-service" element={<CustomerService />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/products" element={<AdminProducts />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
