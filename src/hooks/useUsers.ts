@@ -6,7 +6,7 @@ export interface RegisteredUser {
   email: string;
   name: string;
   password: string;
-  role: 'user' | 'admin';
+  role: 'user' | 'admin' | 'vendor';
   registerDate: string;
   isActive: boolean;
 }
@@ -30,7 +30,16 @@ export const useUsers = () => {
           registerDate: new Date().toLocaleDateString(),
           isActive: true
         };
-        const initialUsers = [adminUser];
+        const vendorUser: RegisteredUser = {
+          id: 'vendor_1',
+          email: 'vendor@mall.com',
+          name: '商家',
+          password: 'vendor123',
+          role: 'vendor',
+          registerDate: new Date().toLocaleDateString(),
+          isActive: true
+        };
+        const initialUsers = [adminUser, vendorUser];
         localStorage.setItem('registered_users', JSON.stringify(initialUsers));
         setRegisteredUsers(initialUsers);
       }

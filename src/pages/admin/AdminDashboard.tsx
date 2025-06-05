@@ -10,8 +10,9 @@ import { useOrders } from '@/hooks/useOrders';
 import { useProducts } from '@/hooks/useProducts';
 import { useUsers } from '@/hooks/useUsers'; // Import the useUsers hook
 
+
 const AdminDashboard = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { getAllOrders } = useOrders();
   const { products } = useProducts();
@@ -42,30 +43,7 @@ const AdminDashboard = () => {
   const completedOrders = orders.filter(order => order.status === '已完成').length;
 
   const stats = [
-    {
-      title: '总销售额',
-      value: `¥${totalRevenue.toLocaleString()}`,
-      count: totalRevenue,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
-      icon: '💰'
-    },
-    {
-      title: '订单数量',
-      value: totalOrders.toLocaleString(),
-      count: totalOrders,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
-      icon: '📦'
-    },
-    {
-      title: '商品数量',
-      value: totalProducts.toLocaleString(),
-      count: totalProducts,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
-      icon: '🛍️'
-    },
+    
     {
       title: '用户数量',
       value: totalUsers.toLocaleString(),
@@ -94,121 +72,54 @@ const AdminDashboard = () => {
             <h1 className="text-2xl font-semibold text-gray-900">管理后台</h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-500">欢迎, {user?.name}</span>
-              <Link to="/">
-                <Button variant="outline" size="sm">
-                  返回商城
+                <Button variant="outline" size="sm"
+                  onClick={() => {
+                  logout();
+                  navigate('/admin/login');
+               }}
+          >
+          退出登录
                 </Button>
-              </Link>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* 统计卡片 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {stats.map((stat, index) => (
-            <Card key={index}>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <div className={`p-2 rounded-lg ${stat.bgColor}`}>
-                    <span className="text-2xl">{stat.icon}</span>
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                    <p className="text-2xl font-semibold text-gray-900">{stat.value}</p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {stat.count === 0 ? '暂无数据' : '实时数据'}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+   <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  {/* 统计卡片 */}
+  <div
+    className={`
+      grid gap-6 mb-8
+      ${stats.length === 1
+        ? 'grid-cols-1 place-items-center'
+        : 'grid-cols-1 md:grid-cols-2 justify-center'}
+    `}
+  >
+    {stats.map((stat, index) => (
+      <Card
+        key={index}
+        className="min-h-[120px] w-full flex items-center justify-center text-base"
+      >
+        <CardContent className="p-6 w-full flex flex-col items-center justify-center">
+          <div className={`p-3 rounded-lg ${stat.bgColor} mb-2 flex items-center justify-center`}>
+            <span className="text-2xl">{stat.icon}</span>
+          </div>
+          <p className="text-sm font-medium text-gray-600 text-center">{stat.title}</p>
+          <p className="text-2xl font-semibold text-gray-900 text-center">{stat.value}</p>
+          <p className="text-xs text-gray-500 mt-1 text-center">
+            {stat.count === 0 ? '暂无数据' : '实时数据'}
+          </p>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
 
-        <div className="grid grid-cols-1 gap-8">
-          {/* 订单状态统计 */}
-          <Card>
-            <CardHeader>
-              <CardTitle>订单状态统计</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {orderStats.map((stat, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-600">{stat.title}</span>
-                    <span className={`text-lg font-semibold ${stat.color}`}>{stat.value}</span>
-                  </div>
-                ))}
-                <div className="pt-2 border-t">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-900">总计</span>
-                    <span className="text-lg font-semibold text-gray-900">{totalOrders}</span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* 最近订单 */}
-          <Card>
-            <CardHeader>
-              <CardTitle>最近订单</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentOrders.length === 0 ? (
-                  <p className="text-gray-500 text-center py-4">暂无订单</p>
-                ) : (
-                  recentOrders.map((order) => (
-                    <div key={order.id} className="flex items-center justify-between p-3 border rounded-lg">
-                      <div>
-                        <p className="font-medium text-sm">#{order.id.slice(-8)}</p>
-                        <p className="text-xs text-gray-500">{order.shippingAddress?.name || '未知客户'}</p>
-                        <p className="text-xs text-gray-400">
-                          {new Date().toLocaleDateString()}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-medium text-red-500">¥{order.totalPrice}</p>
-                        <Badge variant="secondary" className="text-xs">
-                          {order.status}
-                        </Badge>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+       
 
         {/* 快速操作 */}
         <div className="mt-8">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">快速操作</h2>
           <div className="grid grid-cols-1 gap-4">
-            <Link to="/admin/products">
-              <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-6 text-center">
-                  <Package className="w-8 h-8 mx-auto mb-3 text-blue-600" />
-                  <h3 className="font-medium">商品管理</h3>
-                  <p className="text-sm text-gray-500 mt-1">管理商品信息</p>
-                  <p className="text-xs text-blue-600 mt-2">当前: {totalProducts} 个商品</p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/admin/orders">
-              <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-6 text-center">
-                  <ShoppingCart className="w-8 h-8 mx-auto mb-3 text-green-600" />
-                  <h3 className="font-medium">订单管理</h3>
-                  <p className="text-sm text-gray-500 mt-1">处理客户订单</p>
-                  <p className="text-xs text-green-600 mt-2">当前: {totalOrders} 个订单</p>
-                </CardContent>
-              </Card>
-            </Link>
 
             <Link to="/admin/users">
               <Card className="hover:shadow-md transition-shadow cursor-pointer">

@@ -20,6 +20,8 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminOrders from "./pages/admin/AdminOrders";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminLogin from "./pages/ManageLogin";
+import VendorDashboard from './pages/VendorDashBoard';
 import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient({
@@ -50,7 +52,9 @@ const App: React.FC = () => {
               <Route path="/category/:category" element={<Category />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/customer-service" element={<CustomerService />} />
+              <Route path="/vendor" element={<VendorDashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/manage/login" element={<AdminLogin />} />
               <Route path="/admin/products" element={<AdminProducts />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="/admin/users" element={<AdminUsers />} />

@@ -61,8 +61,10 @@ store-front/
 │   │   ├── Product.tsx                  # 商品详情页
 │   │   ├── Profile.tsx                  # 用户中心
 │   │   ├── Register.tsx                 # 注册页
+│   │   ├── Vendor.tsx                   # 商户管理界面  
+│   │   ├── ManageLogin.tsx              # 管理端网页登录 
 │   │   └── admin/                       # 后台管理页面
-│   │       ├── AdminDashboard.tsx       # 管理后台首页
+│   │       ├── AdminDashboard.tsx       # 管理员后台首页
 │   │       ├── AdminProducts.tsx        # 商品管理
 │   │       ├── AdminOrders.tsx          # 订单管理
 │   │       └── AdminUsers.tsx           # 用户管理
@@ -169,6 +171,9 @@ store-front/
 - 默认管理员账号：  
   - 邮箱：admin@mall.com  
   - 密码：admin123
+- 默认商家账号：  
+  - 邮箱：vendor@mall.com  
+  - 密码：vendor123
 
 ---
 
