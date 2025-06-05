@@ -31,7 +31,7 @@ const BottomNavigation = () => {
                   "w-6 h-6 mb-1",
                   isActive ? "text-blue-600" : "text-gray-500"
                 )} />
-                {item.badge && item.badge > 0 && (
+                { item.badge > 0 && (
                   <Badge className="absolute -top-2 -right-2 w-5 h-5 rounded-full p-0 flex items-center justify-center text-xs bg-red-500">
                     {item.badge > 99 ? '99+' : item.badge}
                   </Badge>
