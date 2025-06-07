@@ -90,6 +90,14 @@ const Header = () => {
                       </Link>
                     </DropdownMenuItem>
                   )}
+                  {user.role === 'vendor' && (
+                    <DropdownMenuItem asChild>
+                      <Link to="/vendor" className="flex items-center cursor-pointer">
+                        <User className="w-4 h-4 mr-2" />
+                        商品管理
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem onClick={handleLogout} className="flex items-center cursor-pointer">
                     <LogOut className="w-4 h-4 mr-2" />
                     退出登录

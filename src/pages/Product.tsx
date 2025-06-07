@@ -70,8 +70,6 @@ const Product = () => {
       
       const orderId = createOrder(items, '微信支付');
       console.log('直接购买创建的订单ID:', orderId);
-      
-      toast.success('订单创建成功！');
       navigate(`/checkout/${orderId}`);
     } catch (error) {
       console.error('创建订单失败:', error);

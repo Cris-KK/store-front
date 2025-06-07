@@ -74,11 +74,10 @@ const AdminDashboard = () => {
               <span className="text-sm text-gray-500">欢迎, {user?.name}</span>
                 <Button variant="outline" size="sm"
                   onClick={() => {
-                  logout();
-                  navigate('/admin/login');
+                  navigate('/'); // 返回商家首页
                }}
           >
-          退出登录
+          返回商家
                 </Button>
             </div>
           </div>

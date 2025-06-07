@@ -37,7 +37,7 @@ const AdminUsers = () => {
     );
   };
 
-  const handleRoleToggle = (userId: string, currentRole: 'user' | 'admin') => {
+  const handleRoleToggle = (userId: string, currentRole: 'user' | 'admin' | 'vendor') => {
     const newRole = currentRole === 'admin' ? 'user' : 'admin';
     updateUserRole(userId, newRole);
     toast.success(`用户角色已更新为${newRole === 'admin' ? '管理员' : '普通用户'}`);

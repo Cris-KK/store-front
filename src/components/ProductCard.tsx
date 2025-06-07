@@ -37,36 +37,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
     toast.success('已添加到购物车');
   };
 
-  const handleBuyNow = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    try {
-      const items = [{
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        quantity: 1,
-        selected: true
-      }];
-      
-      const orderId = createOrder(items, '微信支付');
-      console.log('首页直接购买创建的订单ID:', orderId);
-      
-      if (!orderId) {
-        throw new Error('订单创建失败');
-        throw new Error('订单创建失败');
-      }
-      
-      toast.success('订单创建成功！');
-      
-      setTimeout(() => {
-        navigate(`/checkout/${orderId}`);
-      }, 100);
-    } catch (error) {
-      console.error('创建订单失败:', error);
-      toast.error('创建订单失败，请重试');
-    }
-  };
+  const handleBuyNow = () => {
+  const items = [{
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    image: product.image,
+    selected: true
+  }];
+  // 保存到 localStorage 或 context，供结算页使用
+  localStorage.setItem('checkout_items', JSON.stringify(items));
+  // 跳转到结算页（不带 orderId）
+  navigate(`/checkout/${product.id}`);
+};
 
   if (compact) {
     return (
