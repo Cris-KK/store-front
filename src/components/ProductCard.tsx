@@ -6,6 +6,7 @@ import { ShoppingCart } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import { useOrders } from '@/hooks/useOrders';
 import { toast } from 'sonner';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface Product {
   id: number;
@@ -25,9 +26,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { createOrder } = useOrders();
+  const { user } = useAuth();
+
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!user) {
+      toast.error('请先登录');
+      return;
+    }
     addToCart({
       id: product.id,
       name: product.name,
@@ -38,22 +45,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
   };
 
   const handleBuyNow = () => {
-  const items = [{
-    id: product.id,
-    name: product.name,
-    price: product.price,
-    image: product.image,
-    selected: true
-  }];
-  // 保存到 localStorage 或 context，供结算页使用
-  localStorage.setItem('checkout_items', JSON.stringify(items));
-  // 跳转到结算页（不带 orderId）
-  navigate(`/checkout/${product.id}`);
-};
+    if (!user) {
+      toast.error('请先登录');
+      return;
+    }
+    const items = [{
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      selected: true
+    }];
+    // 保存到 localStorage 或 context，供结算页使用
+    localStorage.setItem('checkout_items', JSON.stringify(items));
+    // 跳转到结算页（不带 orderId）
+    navigate(`/checkout/${product.id}`);
+  };
 
   if (compact) {
     return (
-      <Card 
+      <Card
         className="cursor-pointer hover:shadow-md transition-shadow"
         onClick={() => navigate(`/product/${product.id}`)}
       >
@@ -96,7 +107,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
   }
 
   return (
-    <Card 
+    <Card
       className="cursor-pointer hover:shadow-md transition-shadow"
       onClick={() => navigate(`/product/${product.id}`)}
     >

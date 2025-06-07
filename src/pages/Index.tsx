@@ -10,10 +10,10 @@ import { useProducts } from '@/hooks/useProducts';
 
 const Index = () => {
   const navigate = useNavigate();
-  const { getProductsByCategory } = useProducts();
-  
+  const { getSortedProductsByCategory } = useProducts();
+
   // 获取热门商品（前4个上架商品）
-  const products = getProductsByCategory('all').slice(0, 4);
+  const products = getSortedProductsByCategory('all').slice(0, 4);
 
   // 更新商品分类
   const categories = [
@@ -27,14 +27,14 @@ const Index = () => {
   ];
 
   const handleCategoryClick = (categoryKey: string) => {
-      console.log('点击的分类 key:', categoryKey);
+    console.log('点击的分类 key:', categoryKey);
     navigate(`/category/${encodeURIComponent(categoryKey)}`);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16 w-full">
       <Header />
-      
+
       <div className="pt-14 w-full">
         <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
           {/* 轮播图 */}
@@ -46,8 +46,8 @@ const Index = () => {
           <div className="mb-4 bg-white rounded-lg p-3">
             <div className="grid grid-cols-7 gap-2">
               {categories.map((category, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="flex flex-col items-center cursor-pointer hover:bg-gray-50 rounded-lg p-2 transition-colors"
                   onClick={() => handleCategoryClick(category.key)}
                 >

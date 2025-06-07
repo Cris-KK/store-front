@@ -11,6 +11,7 @@ import { useOrders } from '@/hooks/useOrders';
 import { useProducts } from '@/hooks/useProducts';
 import { toast } from 'sonner';
 import BottomNavigation from '@/components/BottomNavigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Product = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ const Product = () => {
   const { getProductById } = useProducts();
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { user } = useAuth();
 
   // 获取实际商品数据
   const product = getProductById(parseInt(id || '1'));
@@ -46,6 +48,10 @@ const Product = () => {
   ] : [];
 
   const handleAddToCart = () => {
+    if (!user) {
+      toast.error('请先登录');
+      return;
+    }
     for (let i = 0; i < quantity; i++) {
       addToCart({
         id: product.id,
@@ -58,6 +64,10 @@ const Product = () => {
   };
 
   const handleBuyNow = () => {
+    if (!user) {
+      toast.error('请先登录');
+      return;
+    }
     try {
       const items = [{
         id: product.id,
@@ -67,7 +77,7 @@ const Product = () => {
         quantity: quantity,
         selected: true
       }];
-      
+
       const orderId = createOrder(items, '微信支付');
       console.log('直接购买创建的订单ID:', orderId);
       navigate(`/checkout/${orderId}`);
@@ -80,7 +90,7 @@ const Product = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-16 w-full max-w-md mx-auto">
       <Header />
-      
+
       <div className="pt-14 px-4 py-4">
         {/* Product Images */}
         <div className="mb-4">
@@ -97,9 +107,8 @@ const Product = () => {
                 key={index}
                 src={image}
                 alt={`${product.name} ${index + 1}`}
-                className={`w-16 h-16 object-cover rounded cursor-pointer border-2 flex-shrink-0 ${
-                  selectedImage === index ? 'border-blue-500' : 'border-gray-200'
-                }`}
+                className={`w-16 h-16 object-cover rounded cursor-pointer border-2 flex-shrink-0 ${selectedImage === index ? 'border-blue-500' : 'border-gray-200'
+                  }`}
                 onClick={() => setSelectedImage(index)}
               />
             ))}

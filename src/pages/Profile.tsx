@@ -48,31 +48,31 @@ const Profile = () => {
 
   // 计算积分（所有已完成订单的总金额）
   const orderStats = [
-    { 
-      title: '全部订单', 
-      value: orders.length, 
-      icon: Package, 
+    {
+      title: '全部订单',
+      value: orders.length,
+      icon: Package,
       color: 'text-gray-600',
       filter: 'all'
     },
-    { 
-      title: '待付款', 
-      value: orders.filter(o => o.status === '待支付').length, 
-      icon: CreditCard, 
+    {
+      title: '待付款',
+      value: orders.filter(o => o.status === '待支付').length,
+      icon: CreditCard,
       color: 'text-yellow-600',
       filter: 'pending'
     },
-    { 
-      title: '待收货', 
-      value: orders.filter(o => o.status === '已发货').length, 
-      icon: Package, 
+    {
+      title: '待收货',
+      value: orders.filter(o => o.status === '已发货').length,
+      icon: Package,
       color: 'text-blue-600',
       filter: 'shipping'
     },
-    { 
-      title: '退款/售后', 
-      value: 0, 
-      icon: Package, 
+    {
+      title: '退款/售后',
+      value: 0,
+      icon: Package,
       color: 'text-red-600',
       filter: 'refund'
     },
@@ -92,7 +92,7 @@ const Profile = () => {
       addAddress(addressForm);
       toast.success('地址添加成功');
     }
-    
+
     setShowAddressDialog(false);
     setAddressForm({ name: '', phone: '', address: '', isDefault: false });
   };
@@ -119,8 +119,8 @@ const Profile = () => {
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">地址管理</CardTitle>
           <div className="space-x-2">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="sm"
               onClick={() => {
                 setEditingAddress(null);
@@ -155,15 +155,15 @@ const Profile = () => {
                     <p className="text-gray-600 text-sm">{address.address}</p>
                   </div>
                   <div className="flex space-x-2">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       size="sm"
                       onClick={() => handleEditAddress(address)}
                     >
                       编辑
                     </Button>
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       size="sm"
                       className="text-red-500"
                       onClick={() => handleDeleteAddress(address.id)}
@@ -182,7 +182,7 @@ const Profile = () => {
 
   const renderOrders = (filter: string) => {
     let filteredOrders = orders;
-    
+
     switch (filter) {
       case 'pending':
         filteredOrders = orders.filter(o => o.status === '待支付');
@@ -208,7 +208,7 @@ const Profile = () => {
                 <span className="font-medium">订单 #{order.id}</span>
                 <Badge variant="secondary">{order.status}</Badge>
               </div>
-              
+
               <div className="flex items-center space-x-3 mb-2">
                 {order.items.slice(0, 3).map((item, index) => (
                   <div key={index} className="flex items-center space-x-2">
@@ -224,7 +224,7 @@ const Profile = () => {
                   <span className="text-sm text-gray-500">等{order.items.length}件商品</span>
                 )}
               </div>
-              
+
               <div className="flex items-center justify-between text-sm text-gray-600">
                 <span>{order.createTime}</span>
                 <div className="flex items-center space-x-4">
@@ -272,8 +272,8 @@ const Profile = () => {
               <CardContent>
                 <div className="grid grid-cols-4 gap-2">
                   {orderStats.map((stat, index) => (
-                    <div 
-                      key={index} 
+                    <div
+                      key={index}
                       className="text-center cursor-pointer p-2"
                       onClick={() => setActiveTab(`orders-${stat.filter}`)}
                     >
@@ -299,8 +299,8 @@ const Profile = () => {
                       <p className="text-xs text-gray-500">已保存 {addresses.length} 个地址</p>
                     </div>
                   </div>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     onClick={() => setActiveTab('addresses')}
                   >
@@ -341,7 +341,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
       <Header />
-      
+
       <div className="pt-14 max-w-md mx-auto px-4 py-4">
         {/* 用户信息卡片 */}
         <Card className="mb-4">
@@ -351,8 +351,8 @@ const Profile = () => {
             </div>
             <h3 className="font-bold text-lg">{user.name}</h3>
             <p className="text-gray-600 mb-3 text-sm">{user.email}</p>
-            <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
-              {user.role === 'admin' ? '管理员' : '普通用户'}
+            <Badge variant={user.role === 'admin' ? 'default' : user.role === 'vendor' ? 'default' : 'secondary'}>
+              {user.role === 'admin' ? '管理员' : user.role === 'vendor' ? '商家' : '普通用户'}
             </Badge>
           </CardContent>
         </Card>
@@ -373,7 +373,7 @@ const Profile = () => {
               <Input
                 id="name"
                 value={addressForm.name}
-                onChange={(e) => setAddressForm({...addressForm, name: e.target.value})}
+                onChange={(e) => setAddressForm({ ...addressForm, name: e.target.value })}
                 placeholder="请输入收货人姓名"
               />
             </div>
@@ -382,7 +382,7 @@ const Profile = () => {
               <Input
                 id="phone"
                 value={addressForm.phone}
-                onChange={(e) => setAddressForm({...addressForm, phone: e.target.value})}
+                onChange={(e) => setAddressForm({ ...addressForm, phone: e.target.value })}
                 placeholder="请输入手机号码"
               />
             </div>
@@ -391,7 +391,7 @@ const Profile = () => {
               <Input
                 id="address"
                 value={addressForm.address}
-                onChange={(e) => setAddressForm({...addressForm, address: e.target.value})}
+                onChange={(e) => setAddressForm({ ...addressForm, address: e.target.value })}
                 placeholder="请输入详细地址"
               />
             </div>
@@ -399,19 +399,19 @@ const Profile = () => {
               <Checkbox
                 id="isDefault"
                 checked={addressForm.isDefault}
-                onCheckedChange={(checked) => setAddressForm({...addressForm, isDefault: !!checked})}
+                onCheckedChange={(checked) => setAddressForm({ ...addressForm, isDefault: !!checked })}
               />
               <Label htmlFor="isDefault">设为默认地址</Label>
             </div>
             <div className="flex space-x-3 pt-4">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="flex-1"
                 onClick={() => setShowAddressDialog(false)}
               >
                 取消
               </Button>
-              <Button 
+              <Button
                 className="flex-1"
                 onClick={handleAddressSubmit}
               >
@@ -421,7 +421,7 @@ const Profile = () => {
           </div>
         </DialogContent>
       </Dialog>
-      
+
       <BottomNavigation />
     </div>
   );

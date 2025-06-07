@@ -27,7 +27,7 @@ const defaultProducts: Product[] = [
     status: 'active',
     description: '时尚潮流，舒适休闲，适合各种场合穿搭的经典外套',
     rating: 4.6,
-    sales: 234
+    sales: 0
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const defaultProducts: Product[] = [
     stock: 80,
     status: 'active',
     rating: 4.5,
-    sales: 456
+    sales: 0
   },
   // 美食类
   {
@@ -52,7 +52,7 @@ const defaultProducts: Product[] = [
     stock: 100,
     status: 'active',
     rating: 4.8,
-    sales: 789
+    sales: 0
   },
   {
     id: 4,
@@ -64,7 +64,7 @@ const defaultProducts: Product[] = [
     stock: 60,
     status: 'active',
     rating: 4.7,
-    sales: 345
+    sales: 0
   },
   // 居家类
   {
@@ -77,7 +77,7 @@ const defaultProducts: Product[] = [
     stock: 120,
     status: 'active',
     rating: 4.4,
-    sales: 567
+    sales: 0
   },
   {
     id: 6,
@@ -89,7 +89,7 @@ const defaultProducts: Product[] = [
     stock: 45,
     status: 'active',
     rating: 4.6,
-    sales: 234
+    sales: 0
   },
   // 美妆类
   {
@@ -103,7 +103,7 @@ const defaultProducts: Product[] = [
     status: 'active',
     description: '滋养肌肤，让您拥有水润光泽的完美肌肤',
     rating: 4.8,
-    sales: 678
+    sales: 0
   },
   {
     id: 8,
@@ -115,7 +115,7 @@ const defaultProducts: Product[] = [
     stock: 90,
     status: 'active',
     rating: 4.7,
-    sales: 432
+    sales: 0
   },
   // 运动类
   {
@@ -128,7 +128,7 @@ const defaultProducts: Product[] = [
     stock: 70,
     status: 'active',
     rating: 4.6,
-    sales: 345
+    sales: 0
   },
   {
     id: 10,
@@ -140,7 +140,7 @@ const defaultProducts: Product[] = [
     stock: 120,
     status: 'active',
     rating: 4.5,
-    sales: 567
+    sales: 0
   },
   // 户外类
   {
@@ -153,7 +153,7 @@ const defaultProducts: Product[] = [
     stock: 40,
     status: 'active',
     rating: 4.7,
-    sales: 234
+    sales: 0
   },
   {
     id: 12,
@@ -165,7 +165,7 @@ const defaultProducts: Product[] = [
     stock: 25,
     status: 'active',
     rating: 4.8,
-    sales: 123
+    sales: 0
   },
   // 数码类
   {
@@ -179,7 +179,7 @@ const defaultProducts: Product[] = [
     status: 'active',
     description: '高品质音效，长续航，智能降噪，让您享受极致的音乐体验',
     rating: 4.6,
-    sales: 789
+    sales: 0
   },
   {
     id: 14,
@@ -191,7 +191,7 @@ const defaultProducts: Product[] = [
     stock: 60,
     status: 'active',
     rating: 4.7,
-    sales: 456
+    sales: 0
   }
 ];
 
@@ -249,12 +249,21 @@ export const useProducts = () => {
     return products.filter(p => p.category === category && p.status === 'active');
   };
 
+  const getSortedProductsByCategory = (category: string): Product[] => {
+    let filtered = category === 'all'
+      ? products.filter(p => p.status === 'active')
+      : products.filter(p => p.category === category && p.status === 'active');
+    // 按 sales 降序排序，未定义 sales 视为 0
+    return filtered.sort((a, b) => (b.sales || 0) - (a.sales || 0));
+  };
+
   return {
     products,
     addProduct,
     updateProduct,
     deleteProduct,
     getProductById,
-    getProductsByCategory
+    getProductsByCategory,
+    getSortedProductsByCategory
   };
 };

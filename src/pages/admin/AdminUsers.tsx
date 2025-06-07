@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { 
+import {
   Table,
   TableBody,
   TableCell,
@@ -23,8 +23,12 @@ const AdminUsers = () => {
 
   const getRoleBadge = (role: string) => {
     return (
-      <Badge variant={role === 'admin' ? 'default' : 'secondary'}>
-        {role === 'admin' ? '管理员' : '用户'}
+      <Badge variant={role === 'admin' ? 'default' : role === 'vendor' ? 'default' : 'secondary'}>
+        {role === 'admin'
+          ? '管理员'
+          : role === 'vendor'
+            ? '商家'
+            : '普通用户'}
       </Badge>
     );
   };
@@ -117,17 +121,17 @@ const AdminUsers = () => {
                     <TableCell>{user.registerDate}</TableCell>
                     <TableCell>
                       <div className="flex items-center space-x-2">
-                        <Button 
-                          variant="ghost" 
+                        <Button
+                          variant="ghost"
                           size="sm"
                           onClick={() => handleRoleToggle(user.id, user.role)}
                           title={user.role === 'admin' ? '设为普通用户' : '设为管理员'}
                         >
                           <Shield className="w-4 h-4" />
                         </Button>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           className={user.isActive ? "text-red-500 hover:text-red-700" : "text-green-500 hover:text-green-700"}
                           onClick={() => handleStatusToggle(user.id, user.isActive)}
                           title={user.isActive ? '禁用用户' : '启用用户'}
