@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -22,13 +21,13 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (selectedItems.length === 0) {
-      toast.error('请选择要结算的商品');
+      toast.error('请选择要结算的商品', { duration: 1000 });
       return;
     }
 
     const defaultAddress = getDefaultAddress();
     if (!defaultAddress) {
-      toast.error('请先在个人中心添加收货地址');
+      toast.error('请先在个人中心添加收货地址', { duration: 1000 });
       navigate('/profile');
       return;
     }
@@ -36,16 +35,17 @@ const Cart = () => {
     try {
       const orderId = createOrder(selectedItems, '微信支付', defaultAddress);
       console.log('购物车结算创建的订单ID:', orderId);
-      
+
       if (!orderId) {
         throw new Error('订单创建失败');
       }
-      
-      toast.success('订单创建成功！');
+      // 结算成功后移除已选商品
+      selectedItems.forEach(item => removeItem(item.id));
+      toast.success('订单创建成功！', { duration: 500 });
       navigate(`/checkout/${orderId}`);
     } catch (error) {
       console.error('创建订单失败:', error);
-      toast.error('创建订单失败，请重试');
+      toast.error('创建订单失败，请重试', { duration: 1000 });
     }
   };
 
@@ -53,7 +53,7 @@ const Cart = () => {
     return (
       <div className="min-h-screen bg-gray-50 pb-16">
         <Header />
-        <div className="pt-14 max-w-md mx-auto px-4 py-8 text-center">
+        <div className="pt-14 max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-4 py-8 text-center">
           <p>请先登录</p>
         </div>
         <BottomNavigation />
@@ -64,10 +64,10 @@ const Cart = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       <Header />
-      
-      <div className="pt-14 max-w-md mx-auto px-4 py-4">
+
+      <div className="pt-14 max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-4 py-4">
         <h1 className="text-xl font-bold mb-6">购物车</h1>
-        
+
         {cartItems.length === 0 ? (
           <div className="text-center py-8">
             <ShoppingCart className="w-16 h-16 mx-auto text-gray-400 mb-4" />
@@ -132,7 +132,7 @@ const Cart = () => {
 
             {/* 底部结算栏 */}
             <div className="fixed bottom-16 left-0 right-0 bg-white border-t p-4">
-              <div className="max-w-md mx-auto flex items-center justify-between">
+              <div className="max-w-md md:max-w-2xl lg:max-w-4xl mx-auto flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-600">
                     已选 {selectedItems.length} 件商品
@@ -141,7 +141,7 @@ const Cart = () => {
                     总计: ¥{totalPrice}
                   </div>
                 </div>
-                <Button 
+                <Button
                   onClick={handleCheckout}
                   disabled={selectedItems.length === 0}
                   className="px-8"
