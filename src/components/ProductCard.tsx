@@ -41,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
       price: product.price,
       image: product.image
     });
-    toast.success('已添加到购物车');
+    toast.success('已添加到购物车', { duration: 500 });
   };
 
   const handleBuyNow = () => {

@@ -81,46 +81,43 @@ const VendorDashboard = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
-        <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <h1 className="text-2xl font-semibold text-gray-900">管理后台</h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-500">欢迎, {user?.name}</span>
               <Button variant="outline" size="sm"
-                                onClick={() => {
-                                navigate('/');
-                             }}
-                        >
-                        返回商家
-                              </Button>
+                onClick={() => {
+                  navigate('/');
+                }}
+              >
+                返回商家
+              </Button>
             </div>
           </div>
         </div>
       </header>
 
-    <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  {/* 统计卡片 */}
-  <div className="grid grid-cols-1 gap-6 mb-8">
-    {stats.map((stat, index) => (
-      <Card
-        key={index}
-        className="w-full"
-      >
-        <CardContent className="p-6 flex flex-col items-center justify-center">
-          <div className={`p-3 rounded-lg ${stat.bgColor} mb-2 flex items-center justify-center`}>
-            <span className="text-2xl">{stat.icon}</span>
-          </div>
-          <p className="text-sm font-medium text-gray-600 text-center">{stat.title}</p>
-          <p className="text-2xl font-semibold text-gray-900 text-center">{stat.value}</p>
-          <p className="text-xs text-gray-500 mt-1 text-center">
-            {stat.count === 0 ? '暂无数据' : '实时数据'}
-          </p>
-        </CardContent>
-      </Card>
-    ))}
-  </div>
+      <div className="max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* 统计卡片 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {stats.map((stat, index) => (
+            <Card key={index} className="w-full">
+              <CardContent className="p-6 flex flex-col items-center justify-center">
+                <div className={`p-3 rounded-lg ${stat.bgColor} mb-2 flex items-center justify-center`}>
+                  <span className="text-2xl">{stat.icon}</span>
+                </div>
+                <p className="text-sm font-medium text-gray-600 text-center">{stat.title}</p>
+                <p className="text-2xl font-semibold text-gray-900 text-center">{stat.value}</p>
+                <p className="text-xs text-gray-500 mt-1 text-center">
+                  {stat.count === 0 ? '暂无数据' : '实时数据'}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* 订单状态统计 */}
           <Card>
             <CardHeader>
@@ -180,7 +177,7 @@ const VendorDashboard = () => {
         {/* 快速操作 */}
         <div className="mt-8">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">快速操作</h2>
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Link to="/admin/products">
               <Card className="hover:shadow-md transition-shadow cursor-pointer">
                 <CardContent className="p-6 text-center">
@@ -202,8 +199,6 @@ const VendorDashboard = () => {
                 </CardContent>
               </Card>
             </Link>
-
-
           </div>
         </div>
       </div>

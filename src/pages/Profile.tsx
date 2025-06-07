@@ -270,7 +270,7 @@ const Profile = () => {
                 <CardTitle className="text-lg">我的订单</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                   {orderStats.map((stat, index) => (
                     <div
                       key={index}
@@ -342,7 +342,7 @@ const Profile = () => {
     <div className="min-h-screen bg-gray-50 pb-16">
       <Header />
 
-      <div className="pt-14 max-w-md mx-auto px-4 py-4">
+      <div className="pt-14 max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-4 py-4">
         {/* 用户信息卡片 */}
         <Card className="mb-4">
           <CardContent className="p-4 text-center">
@@ -363,7 +363,7 @@ const Profile = () => {
 
       {/* 地址管理弹窗 */}
       <Dialog open={showAddressDialog} onOpenChange={setShowAddressDialog}>
-        <DialogContent className="max-w-sm mx-auto">
+        <DialogContent className="max-w-sm md:max-w-md lg:max-w-lg mx-auto">
           <DialogHeader>
             <DialogTitle>{editingAddress ? '编辑地址' : '添加收货地址'}</DialogTitle>
           </DialogHeader>

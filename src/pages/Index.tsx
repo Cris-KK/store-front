@@ -36,15 +36,15 @@ const Index = () => {
       <Header />
 
       <div className="pt-14 w-full">
-        <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 轮播图 */}
           <div className="mt-2 mb-4">
             <PromoBanner />
           </div>
 
-          {/* 商品分类 - 一行7个 */}
+          {/* 商品分类 */}
           <div className="mb-4 bg-white rounded-lg p-3">
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 md:grid-cols-7 gap-2">
               {categories.map((category, index) => (
                 <div
                   key={index}
@@ -61,7 +61,7 @@ const Index = () => {
           {/* 热门商品 */}
           <div className="mb-4">
             <h2 className="text-lg font-bold mb-3">热门商品</h2>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
