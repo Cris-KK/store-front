@@ -18,16 +18,16 @@ const Login = () => {
     e.preventDefault();
     
     if (!email || !password) {
-      toast.error('请输入邮箱和密码');
+      toast.error('请输入邮箱和密码', { duration: 1000 });
       return;
     }
     
     const success = await login(email, password);
     if (success) {
-      toast.success('登录成功！');
+      toast.success('登录成功！', { duration: 500 });
       navigate('/');
     } else {
-      toast.error('登录失败，请检查邮箱和密码或先注册账号');
+      toast.error('登录失败，请检查邮箱和密码或先注册账号', { duration: 1000 });
     }
   };
 

@@ -13,7 +13,7 @@ const Index = () => {
   const { getSortedProductsByCategory } = useProducts();
 
   // 获取热门商品（前4个上架商品）
-  const products = getSortedProductsByCategory('all').slice(0, 4);
+  const products = getSortedProductsByCategory('all').slice(0, 12);
 
   // 更新商品分类
   const categories = [
