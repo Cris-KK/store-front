@@ -44,22 +44,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
     toast.success('已添加到购物车', { duration: 500 });
   };
 
-  const handleBuyNow = () => {
+  const handleBuyNow = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!user) {
       toast.error('请先登录');
       return;
     }
+    // 创建订单并获取 orderId
     const items = [{
       id: product.id,
       name: product.name,
       price: product.price,
       image: product.image,
+      quantity: 1,
       selected: true
     }];
-    // 保存到 localStorage 或 context，供结算页使用
-    localStorage.setItem('checkout_items', JSON.stringify(items));
-    // 跳转到结算页（不带 orderId）
-    navigate(`/checkout/${product.id}`);
+    const orderId = createOrder(items, '微信支付');
+    if (orderId) {
+      navigate(`/checkout/${orderId}`);
+    } else {
+      toast.error('创建订单失败');
+    }
   };
 
   if (compact) {
@@ -96,7 +101,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
             <Button
               size="sm"
               className="flex-1 text-xs h-6 px-1 min-w-0"
-              onClick={handleBuyNow}
+              onClick={e => {
+                e.stopPropagation();
+                handleBuyNow(e);
+              }}
             >
               购买
             </Button>
@@ -140,7 +148,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
           <Button
             size="sm"
             className="w-1/2 text-xs h-7"
-            onClick={handleBuyNow}
+            onClick={e => handleBuyNow(e)}
           >
             立即购买
           </Button>

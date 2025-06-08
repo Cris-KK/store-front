@@ -248,7 +248,6 @@ const defaultProducts: Product[] = [
     rating: 4.5,
     sales: 0
   },
-  // 美妆类
   {
     id: 19,
     name: '补水保湿面膜贴深层滋养修护肌肤',
