@@ -81,7 +81,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
               <span className="text-xs text-gray-500">★{product.rating}</span>
             )}
           </div>
-          {product.sales && (
+          {typeof product.sales === 'number' && (
             <p className="text-xs text-gray-500 mb-2">已售{product.sales}件</p>
           )}
           <div className="flex gap-1">
@@ -124,7 +124,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, compact = false }) =
             <span className="text-xs text-gray-500">★{product.rating}</span>
           )}
         </div>
-        {product.sales && (
+        {typeof product.sales === 'number' && (
           <p className="text-xs text-gray-500 mb-2">已售{product.sales}件</p>
         )}
         <div className="flex gap-2 mt-1">

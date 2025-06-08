@@ -1,4 +1,3 @@
-
 // import React, { useState } from 'react';
 // import { useParams } from 'react-router-dom';
 // import Header from '@/components/Header';
@@ -135,15 +134,15 @@ const Category = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 w-full max-w-md mx-auto">
+    <div className="min-h-screen bg-gray-50 pb-20 w-full max-w-md md:max-w-4xl lg:max-w-6xl mx-auto">
       <Header />
       
       <div className="pt-14 px-4">
         <div className="py-4">
           <h1 className="text-xl font-bold mb-4">{getDisplayTitle()}</h1>
           
-          {/* 商品列表 - 使用紧凑模式 */}
-          <div className="grid grid-cols-3 gap-2">
+          {/* 商品列表 - 响应式布局 */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} compact={true} />
             ))}

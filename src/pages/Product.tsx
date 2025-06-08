@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -184,22 +183,49 @@ const Product = () => {
           <CardContent className="p-4">
             <h3 className="text-lg font-bold mb-4">用户评价</h3>
             <div className="space-y-3">
-              {[1, 2, 3].map((review) => (
-                <div key={review} className="border-b pb-3 last:border-b-0">
-                  <div className="flex items-center mb-2">
-                    <div className="flex items-center">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    <span className="ml-2 text-sm font-medium">用户{review}</span>
-                    <span className="ml-auto text-xs text-gray-500">2024-01-{10 + review}</span>
+              <div className="border-b pb-3">
+                <div className="flex items-center mb-2">
+                  <div className="flex items-center">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    ))}
                   </div>
-                  <p className="text-sm text-gray-600">
-                    产品质量很好，发货速度也很快。外观精美，功能强大，值得推荐！
-                  </p>
+                  <span className="ml-2 text-sm font-medium">小明</span>
+                  <span className="ml-auto text-xs text-gray-500">2024-01-12</span>
                 </div>
-              ))}
+                <p className="text-sm text-gray-600">
+                  商品质量非常好，包装精美，物流也很快，客服态度很好，非常满意的一次购物体验！
+                </p>
+              </div>
+              <div className="border-b pb-3">
+                <div className="flex items-center mb-2">
+                  <div className="flex items-center">
+                    {[1, 2, 3, 4].map((star) => (
+                      <Star key={star} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    ))}
+                    <Star className="w-3 h-3 text-gray-300" />
+                  </div>
+                  <span className="ml-2 text-sm font-medium">Lucy</span>
+                  <span className="ml-auto text-xs text-gray-500">2024-01-13</span>
+                </div>
+                <p className="text-sm text-gray-600">
+                  整体不错，性价比高，功能齐全，就是颜色比图片稍微深一点。
+                </p>
+              </div>
+              <div>
+                <div className="flex items-center mb-2">
+                  <div className="flex items-center">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <span className="ml-2 text-sm font-medium">阿伟</span>
+                  <span className="ml-auto text-xs text-gray-500">2024-01-14</span>
+                </div>
+                <p className="text-sm text-gray-600">
+                  非常喜欢，已经推荐给朋友了！下次还会再来购买。
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -97,10 +96,10 @@ const AdminOrders = () => {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         {/* Search */}
         <Card className="mb-6">
-          <CardContent className="p-6">
+          <CardContent className="p-4 md:p-6">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
@@ -114,81 +113,83 @@ const AdminOrders = () => {
         </Card>
 
         {/* Orders Table */}
-        <Card>
-          <CardHeader>
-            <CardTitle>订单列表 (共 {filteredOrders.length} 个订单)</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>订单号</TableHead>
-                  <TableHead>用户ID</TableHead>
-                  <TableHead>商品</TableHead>
-                  <TableHead>金额</TableHead>
-                  <TableHead>状态</TableHead>
-                  <TableHead>下单时间</TableHead>
-                  <TableHead>操作</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredOrders.map((order) => (
-                  <TableRow key={order.id}>
-                    <TableCell className="font-mono text-sm">
-                      #{order.id.slice(-8)}
-                    </TableCell>
-                    <TableCell className="text-sm text-gray-600">
-                      {order.userId || 'guest'}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center space-x-2">
-                        {order.items.slice(0, 2).map((item: any, index: number) => (
-                          <div key={index} className="flex items-center space-x-1">
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="w-8 h-8 object-cover rounded"
-                            />
-                            <span className="text-sm truncate max-w-20">{item.name}</span>
-                          </div>
-                        ))}
-                        {order.items.length > 2 && (
-                          <span className="text-xs text-gray-500">
-                            等{order.items.length}件
-                          </span>
-                        )}
-                      </div>
-                    </TableCell>
-                    <TableCell className="font-medium">¥{order.totalPrice}</TableCell>
-                    <TableCell>{getStatusBadge(order.status)}</TableCell>
-                    <TableCell className="text-sm text-gray-600">
-                      {order.createTime}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center space-x-2">
-                        <Link to={`/order/${order.id}`}>
-                          <Button variant="ghost" size="sm">
-                            <Eye className="w-4 h-4" />
-                          </Button>
-                        </Link>
-                        {order.status === '待发货' && (
-                          <Button 
-                            variant="default" 
-                            size="sm"
-                            onClick={() => handleShip(order.id)}
-                          >
-                            <Package className="w-4 h-4 mr-1" />
-                            发货
-                          </Button>
-                        )}
-                      </div>
-                    </TableCell>
+        <div className="overflow-x-auto">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base md:text-lg">订单列表 (共 {filteredOrders.length} 个订单)</CardTitle>
+            </CardHeader>
+            <CardContent className="p-2 md:p-6">
+              <Table className="min-w-[700px]">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs md:text-sm">订单号</TableHead>
+                    <TableHead className="text-xs md:text-sm">用户ID</TableHead>
+                    <TableHead className="text-xs md:text-sm">商品</TableHead>
+                    <TableHead className="text-xs md:text-sm">金额</TableHead>
+                    <TableHead className="text-xs md:text-sm">状态</TableHead>
+                    <TableHead className="text-xs md:text-sm">下单时间</TableHead>
+                    <TableHead className="text-xs md:text-sm">操作</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+                </TableHeader>
+                <TableBody>
+                  {filteredOrders.map((order) => (
+                    <TableRow key={order.id}>
+                      <TableCell className="font-mono text-xs md:text-sm">
+                        #{order.id.slice(-8)}
+                      </TableCell>
+                      <TableCell className="text-xs md:text-sm text-gray-600">
+                        {order.userId || 'guest'}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center space-x-2">
+                          {order.items.slice(0, 2).map((item: any, index: number) => (
+                            <div key={index} className="flex items-center space-x-1">
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                className="w-8 h-8 object-cover rounded"
+                              />
+                              <span className="text-xs md:text-sm truncate max-w-20">{item.name}</span>
+                            </div>
+                          ))}
+                          {order.items.length > 2 && (
+                            <span className="text-xs text-gray-500">
+                              等{order.items.length}件
+                            </span>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell className="font-medium text-xs md:text-sm">¥{order.totalPrice}</TableCell>
+                      <TableCell>{getStatusBadge(order.status)}</TableCell>
+                      <TableCell className="text-xs md:text-sm text-gray-600">
+                        {order.createTime}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center space-x-2">
+                          <Link to={`/order/${order.id}`}>
+                            <Button variant="ghost" size="sm">
+                              <Eye className="w-4 h-4" />
+                            </Button>
+                          </Link>
+                          {order.status === '待发货' && (
+                            <Button 
+                              variant="default" 
+                              size="sm"
+                              onClick={() => handleShip(order.id)}
+                            >
+                              <Package className="w-4 h-4 mr-1" />
+                              发货
+                            </Button>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

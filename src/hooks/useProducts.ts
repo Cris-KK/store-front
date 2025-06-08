@@ -94,10 +94,10 @@ const defaultProducts: Product[] = [
   // 美妆类
   {
     id: 7,
-    name: '彩妆套装',
+    name: 'lamer护肤套装',
     price: 149,
     originalPrice: 199,
-    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=400&fit=crop',
+    image: 'https://imgservice.suning.cn/uimg1/b2c/image/5yTesIS1mYEkNY4YqsOkyQ.jpg',
     category: '美妆',
     stock: 80,
     status: 'active',
@@ -110,7 +110,7 @@ const defaultProducts: Product[] = [
     name: '丝绒口红套装',
     price: 219,
     originalPrice: 279,
-    image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop',
+    image: "https://cbu01.alicdn.com/img/ibank/O1CN01g0xuHp1j8sbjDvlMq_!!3586514504-0-cib.jpg",
     category: '美妆',
     stock: 90,
     status: 'active',
@@ -120,10 +120,10 @@ const defaultProducts: Product[] = [
   // 运动类
   {
     id: 9,
-    name: '专业跑步鞋',
+    name: 'nike专业跑步鞋',
     price: 399,
     originalPrice: 499,
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
+    image: "https://pic4.zhimg.com/v2-51e8b7d397d8fc55bb0b262e2dcad682_r.jpg",
     category: '运动',
     stock: 70,
     status: 'active',
@@ -135,7 +135,7 @@ const defaultProducts: Product[] = [
     name: '瑜伽垫套装',
     price: 89,
     originalPrice: 129,
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop',
+    image: "https://img.alicdn.com/bao/uploaded/TB1ZVALc5cKOu4jSZKbSuw19XXa.jpg",
     category: '运动',
     stock: 120,
     status: 'active',
@@ -145,27 +145,29 @@ const defaultProducts: Product[] = [
   // 户外类
   {
     id: 11,
-    name: '登山背包',
+    name: '攀山鼠户外登山包',
     price: 329,
     originalPrice: 429,
-    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
+    image: 'https://th.bing.com/th/id/OIP.WpoukquHmo4gM9Bm9vsAbQHaHa?rs=1&pid=ImgDetMain',
     category: '户外',
     stock: 40,
     status: 'active',
     rating: 4.7,
-    sales: 0
+    sales: 0,
+    description: '这款攀山鼠户外登山包采用高强度防水面料，拥有多层收纳空间和人体工学背负系统，适合长途徒步、露营、旅行等多种户外场景，轻便耐用，容量充足，是户外爱好者的理想选择。'
   },
   {
     id: 12,
     name: '户外帐篷',
     price: 589,
     originalPrice: 699,
-    image: 'https://images.unsplash.com/photo-1504851149312-7a075b496cc7?w=400&h=400&fit=crop',
+    image: 'https://cbu01.alicdn.com/img/ibank/2018/147/869/9223968741_2090806006.jpg',
     category: '户外',
     stock: 25,
     status: 'active',
     rating: 4.8,
-    sales: 0
+    sales: 0,
+    description: '户外双层防雨帐篷，采用高密度防水面料和加固支架设计，抗风防雨，通风透气，搭建便捷，适合三至四人家庭或朋友露营使用，带来舒适的户外居住体验。'
   },
   // 数码类
   {
@@ -177,7 +179,7 @@ const defaultProducts: Product[] = [
     category: '数码',
     stock: 100,
     status: 'active',
-    description: '高品质音效，长续航，智能降噪，让您享受极致的音乐体验',
+    description: '高品质音效，长续航，智能降噪，让您享受极致的音乐体验。这款无线蓝牙耳机支持多设备连接，佩戴舒适，适合运动、通勤、学习等多种场景，带来沉浸式音乐享受。',
     rating: 4.6,
     sales: 0
   },
@@ -191,6 +193,86 @@ const defaultProducts: Product[] = [
     stock: 60,
     status: 'active',
     rating: 4.7,
+    sales: 0,
+    description: '这款智能手表集成心率监测、运动追踪、睡眠分析、消息提醒等多种功能，支持防水和蓝牙通话，搭配高清触控屏幕和多种表盘选择，是健康生活与时尚穿搭的完美结合。'
+  },
+  {
+    id: 15,
+    name: '超清便携投影仪家庭影院无线投屏',
+    price: 1299,
+    originalPrice: 1699,
+    image: 'https://th.bing.com/th/id/R.905d3dbc33d0d9145c6b2f026e705ffc?rik=dMhZBEn%2br%2fC1rg&riu=http%3a%2f%2fwww.happybate.com%2fupload%2froom%2f1497004673.jpg&ehk=LgKDl1p2HVp0vV28Ur%2bKjjS1cfmGeRsR7jdqhf6wccM%3d&risl=&pid=ImgRaw&r=0',
+    category: '数码',
+    stock: 30,
+    status: 'active',
+    description: '这款超清便携投影仪支持无线投屏，高清画质，内置音响，适合家庭影院、会议演示和户外露营，操作简单，携带方便。',
+    rating: 4.9,
+    sales: 0
+  },
+  {
+    id: 16,
+    name: '多功能电动牙刷智能清洁',
+    price: 199,
+    originalPrice: 299,
+    image: 'https://th.bing.com/th/id/OIP.DkNE1Or5bmOjLeuKV4sBmQHaE0?rs=1&pid=ImgDetMain',
+    category: '数码',
+    stock: 80,
+    status: 'active',
+    description: '智能定时提醒，强力清洁，长续航，IPX7级全身防水，呵护口腔健康，适合全家使用。',
+    rating: 4.7,
+    sales: 0
+  },
+  {
+    id: 17,
+    name: '全自动扫地机器人智能规划吸尘拖地一体',
+    price: 899,
+    originalPrice: 1299,
+    image: 'https://x0.ifengimg.com/cmpp/fck/2019_36/bc6ed7eeb9fcb2b_w2198_h1466.jpg',
+    category: '居家',
+    stock: 40,
+    status: 'active',
+    description: '全自动智能扫地机器人，支持多种清扫模式，自动回充，强力吸尘，湿拖一体，解放双手，居家必备。',
+    rating: 4.8,
+    sales: 0
+  },
+  {
+    id: 18,
+    name: '北欧风格落地灯简约现代客厅卧室灯具',
+    price: 299,
+    originalPrice: 399,
+    image: 'https://th.bing.com/th/id/OIP.IuwszYg88v0ncy1CVS7-4AHaKt?rs=1&pid=ImgDetMain',
+    category: '居家',
+    stock: 60,
+    status: 'active',
+    description: '北欧极简风格，柔和光线，适合客厅、卧室、书房等多种场景，提升家居格调。',
+    rating: 4.5,
+    sales: 0
+  },
+  // 美妆类
+  {
+    id: 19,
+    name: '补水保湿面膜贴深层滋养修护肌肤',
+    price: 59,
+    originalPrice: 99,
+    image: 'https://th.bing.com/th/id/R.9a29658d059b7d2925468baa3fa68d5d?rik=8ufMO7k3hp%2bFIg&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fimages%2f20170903%2f9d91254695964b0db4875fe400068f6f.jpeg&ehk=HVhnpYsJ5OhVPgpf5%2bGa6glEJdIOnPq7L5PMVeU5FyU%3d&risl=&pid=ImgRaw&r=0',
+    category: '美妆',
+    stock: 200,
+    status: 'active',
+    description: '深层补水，持久保湿，修护肌肤屏障，适合各种肤质，令肌肤水润透亮。',
+    rating: 4.9,
+    sales: 0
+  },
+  {
+    id: 20,
+    name: '多色眼影盘哑光珠光防水不晕染',
+    price: 129,
+    originalPrice: 169,
+    image: 'https://img.alicdn.com/i3/2208626100237/O1CN01pq8X9I1DcaXRufix9_!!2208626100237.jpg',
+    category: '美妆',
+    stock: 120,
+    status: 'active',
+    description: '多色可选，粉质细腻，易晕染，持久不脱妆，适合各种妆容需求。',
+    rating: 4.8,
     sales: 0
   }
 ];
