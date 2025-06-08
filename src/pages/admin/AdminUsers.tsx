@@ -44,12 +44,12 @@ const AdminUsers = () => {
   const handleRoleToggle = (userId: string, currentRole: 'user' | 'admin' | 'vendor') => {
     const newRole = currentRole === 'admin' ? 'user' : 'admin';
     updateUserRole(userId, newRole);
-    toast.success(`用户角色已更新为${newRole === 'admin' ? '管理员' : '普通用户'}`);
+    toast.success(`用户角色已更新为${newRole === 'admin' ? '管理员' : '普通用户'}`, { duration: 1000 });
   };
 
   const handleStatusToggle = (userId: string, currentStatus: boolean) => {
     toggleUserStatus(userId);
-    toast.success(`用户已${currentStatus ? '禁用' : '启用'}`);
+    toast.success(`用户已${currentStatus ? '禁用' : '启用'}`, { duration: 1000 });
   };
 
   const filteredUsers = registeredUsers.filter(user =>

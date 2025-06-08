@@ -49,7 +49,7 @@ const Product = () => {
 
   const handleAddToCart = () => {
     if (!user) {
-      toast.error('请先登录');
+      toast.error('请先登录', { duration: 1000 });
       return;
     }
     for (let i = 0; i < quantity; i++) {
@@ -60,12 +60,12 @@ const Product = () => {
         image: product.image
       });
     }
-    toast.success(`已添加 ${quantity} 件商品到购物车`);
+    toast.success(`已添加 ${quantity} 件商品到购物车`, { duration: 1000 });
   };
 
   const handleBuyNow = () => {
     if (!user) {
-      toast.error('请先登录');
+      toast.error('请先登录', { duration: 1000 });
       return;
     }
     try {
@@ -83,7 +83,7 @@ const Product = () => {
       navigate(`/checkout/${orderId}`);
     } catch (error) {
       console.error('创建订单失败:', error);
-      toast.error('创建订单失败，请重试');
+      toast.error('创建订单失败，请重试', { duration: 1000 });
     }
   };
 

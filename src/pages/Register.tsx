@@ -20,21 +20,21 @@ const Register = () => {
     e.preventDefault();
     
     if (!email || !password || !name) {
-      toast.error('请填写完整信息');
+      toast.error('请填写完整信息', { duration: 1000 });
       return;
     }
     
     if (password !== confirmPassword) {
-      toast.error('两次密码输入不一致');
+      toast.error('两次密码输入不一致', { duration: 1000 });
       return;
     }
-    
+
     const success = await register(email, password, name);
     if (success) {
-      toast.success('注册成功！');
+      toast.success('注册成功！', { duration: 1000 });
       navigate('/');
     } else {
-      toast.error('注册失败，该邮箱已被注册');
+      toast.error('注册失败，该邮箱已被注册', { duration: 1000 });
     }
   };
 

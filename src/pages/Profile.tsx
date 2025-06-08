@@ -80,17 +80,17 @@ const Profile = () => {
 
   const handleAddressSubmit = () => {
     if (!addressForm.name || !addressForm.phone || !addressForm.address) {
-      toast.error('请填写完整地址信息');
+      toast.error('请填写完整地址信息', { duration: 1000 });
       return;
     }
 
     if (editingAddress) {
       updateAddress(editingAddress.id, addressForm);
-      toast.success('地址更新成功');
+      toast.success('地址更新成功', { duration: 500});
       setEditingAddress(null);
     } else {
       addAddress(addressForm);
-      toast.success('地址添加成功');
+      toast.success('地址添加成功', { duration: 500 });
     }
 
     setShowAddressDialog(false);
@@ -110,7 +110,7 @@ const Profile = () => {
 
   const handleDeleteAddress = (id: string) => {
     deleteAddress(id);
-    toast.success('地址删除成功');
+    toast.success('地址删除成功', { duration: 500 });
   };
 
   const renderAddressManagement = () => (

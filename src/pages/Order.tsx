@@ -19,7 +19,7 @@ const Order = () => {
 
   useEffect(() => {
     if (!order) {
-      toast.error('订单不存在');
+      toast.error('订单不存在', { duration: 1000 });
       navigate('/profile');
     }
   }, [order, navigate]);
@@ -35,7 +35,7 @@ const Order = () => {
     const newPoints = points + order.totalPrice;
     localStorage.setItem(`points_${user.id}`, newPoints.toString());
     
-    toast.success(`订单已确认收货，获得 ${order.totalPrice} 积分！`);
+    toast.success(`订单已确认收货，获得 ${order.totalPrice} 积分！`, { duration: 1000 });
   };
 
   if (!order) {

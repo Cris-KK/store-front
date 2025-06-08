@@ -59,7 +59,7 @@ const AdminOrders = () => {
       // 使用全局更新方法
       updateOrderStatusGlobally(orderId, '已发货');
       
-      toast.success('订单已发货！');
+      toast.success('订单已发货！', { duration: 1000 });
       
       // 立即刷新订单列表
       setTimeout(() => {
@@ -69,7 +69,7 @@ const AdminOrders = () => {
       
     } catch (error) {
       console.error('发货失败:', error);
-      toast.error('发货失败，请重试');
+      toast.error('发货失败，请重试', { duration: 1000 });
     }
   };
 

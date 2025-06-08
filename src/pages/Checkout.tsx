@@ -32,7 +32,7 @@ const Checkout = () => {
           setSelectedAddress(defaultAddr);
         }
       } else {
-        toast.error('订单不存在');
+        toast.error('订单不存在', { duration: 1000 });
         navigate('/');
       }
     }
@@ -44,19 +44,19 @@ const Checkout = () => {
 
   const handlePay = () => {
     if (!selectedAddress) {
-      toast.error('请选择收货地址');
+      toast.error('请选择收货地址', { duration: 1000 });
       return;
     }
 
     if (!order) {
-      toast.error('订单信息不存在');
+      toast.error('订单信息不存在', { duration: 1000 });
       return;
     }
 
     // 模拟支付成功
     updateOrderStatus(order.id, '待发货');
-    toast.success('支付成功！订单已提交');
-    
+    toast.success('支付成功！订单已提交', { duration: 1000 });
+
     setTimeout(() => {
       navigate('/profile');
     }, 1500);

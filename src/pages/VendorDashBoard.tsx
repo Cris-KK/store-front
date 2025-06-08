@@ -20,7 +20,7 @@ const VendorDashboard = () => {
   // 检查管理员权限
   useEffect(() => {
     if (!user || user.role !== 'vendor') {
-      toast.error('无权限访问');
+      toast.error('无权限访问', { duration: 1000 });
       navigate('/');
     }
   }, [user, navigate]);

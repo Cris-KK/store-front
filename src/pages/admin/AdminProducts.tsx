@@ -53,7 +53,7 @@ const AdminProducts = () => {
     if (user === null) return; // 等 user 恢复后再判断
     if (!user || user.role !== 'vendor') {
       alert(user.role)
-      toast.error('无权限访问');
+      toast.error('无权限访问', { duration: 1000 });
       navigate('/');
     }
   }, [user, navigate]);
@@ -106,12 +106,12 @@ const AdminProducts = () => {
 
   const handleSubmitProduct = () => {
     if (!productForm.name || !productForm.price || !productForm.category) {
-      toast.error('请填写完整信息');
+      toast.error('请填写完整信息', { duration: 1000 });
       return;
     }
 
     if (!productForm.image) {
-      toast.error('请上传商品图片');
+      toast.error('请上传商品图片', { duration: 1000 });
       return;
     }
 
@@ -124,10 +124,10 @@ const AdminProducts = () => {
 
     if (editingProduct) {
       updateProduct(editingProduct.id, productData);
-      toast.success('商品更新成功');
+      toast.success('商品更新成功', { duration: 500 });
     } else {
       addProduct(productData);
-      toast.success('商品添加成功');
+      toast.success('商品添加成功', { duration: 500 });
     }
 
     setShowProductDialog(false);
@@ -141,8 +141,8 @@ const AdminProducts = () => {
   const handleToggleStatus = (product: any) => {
     const newStatus = product.status === 'active' ? 'inactive' : 'active';
     updateProduct(product.id, { status: newStatus });
-    toast.success(`商品已${newStatus === 'active' ? '上架' : '下架'}`);
-    
+    toast.success(`商品已${newStatus === 'active' ? '上架' : '下架'}`, { duration: 1000 });
+
     // 延迟刷新以确保数据同步
     setTimeout(() => {
       window.location.reload();
@@ -152,7 +152,7 @@ const AdminProducts = () => {
   const handleDeleteProduct = (id: number) => {
     if (confirm('确定要删除这个商品吗？')) {
       deleteProduct(id);
-      toast.success('商品删除成功');
+      toast.success('商品删除成功', { duration: 500 });
       
       // 延迟刷新以确保数据同步
       setTimeout(() => {
