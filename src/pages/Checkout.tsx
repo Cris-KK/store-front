@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import AddressSelector from '@/components/AddressSelector';
+import CouponSelector from '@/components/CouponSelector';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useOrders } from '@/hooks/useOrders';
 import { useAddress, Address } from '@/hooks/useAddress';
+import { useCoupons, Coupon } from '@/hooks/useCoupons';
 import { toast } from 'sonner';
 
 const Checkout = () => {
@@ -16,10 +18,14 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { getOrderById, updateOrderStatus } = useOrders();
   const { getDefaultAddress } = useAddress();
+  const { generateRandomCoupon, useCoupon, getAvailableCoupons } = useCoupons();
   
   const [selectedAddress, setSelectedAddress] = useState<Address | undefined>();
   const [paymentMethod, setPaymentMethod] = useState('微信支付');
   const [order, setOrder] = useState<any>(null);
+  const [selectedCoupon, setSelectedCoupon] = useState<Coupon | undefined>();
+  const [showCouponGenerate, setShowCouponGenerate] = useState(true);
+  const [availableCoupons, setAvailableCoupons] = useState<Coupon[]>([]);
 
   useEffect(() => {
     if (orderId) {
@@ -31,6 +37,8 @@ const Checkout = () => {
         if (defaultAddr) {
           setSelectedAddress(defaultAddr);
         }
+        // 加载可用优惠券
+        setAvailableCoupons(getAvailableCoupons());
       } else {
         toast.error('订单不存在', { duration: 1000 });
         navigate('/');
@@ -42,6 +50,27 @@ const Checkout = () => {
     setSelectedAddress(address);
   };
 
+  const handleGenerateCoupon = () => {
+    if (!order) return;
+    
+    const newCoupon = generateRandomCoupon(order.totalPrice);
+    setAvailableCoupons([newCoupon, ...availableCoupons]);
+    setShowCouponGenerate(false);
+    toast.success(`恭喜！获得 ${newCoupon.discountPercent}% 优惠券，可省 ¥${newCoupon.discountAmount}`, { 
+      duration: 2000 
+    });
+  };
+
+  const handleCouponSelect = (coupon: Coupon | undefined) => {
+    setSelectedCoupon(coupon);
+  };
+
+  const calculateFinalPrice = () => {
+    if (!order) return 0;
+    const discount = selectedCoupon ? selectedCoupon.discountAmount : 0;
+    return Math.max(0, order.totalPrice - discount);
+  };
+
   const handlePay = () => {
     if (!selectedAddress) {
       toast.error('请选择收货地址', { duration: 1000 });
@@ -51,6 +80,35 @@ const Checkout = () => {
     if (!order) {
       toast.error('订单信息不存在', { duration: 1000 });
       return;
+    }
+
+    // 如果使用了优惠券，标记为已使用
+    if (selectedCoupon) {
+      useCoupon(selectedCoupon.id, order.id);
+      
+      // 更新订单信息，添加优惠券相关字段
+      const updatedOrder = {
+        ...order,
+        originalPrice: order.totalPrice,
+        couponDiscount: selectedCoupon.discountAmount,
+        couponId: selectedCoupon.id,
+        totalPrice: calculateFinalPrice()
+      };
+      
+      // 更新localStorage中的订单数据
+      try {
+        const ordersKey = `orders_${order.userId}`;
+        const savedOrders = localStorage.getItem(ordersKey);
+        if (savedOrders) {
+          const orders = JSON.parse(savedOrders);
+          const updatedOrders = orders.map((o: any) => 
+            o.id === order.id ? updatedOrder : o
+          );
+          localStorage.setItem(ordersKey, JSON.stringify(updatedOrders));
+        }
+      } catch (error) {
+        console.error('更新订单失败:', error);
+      }
     }
 
     // 模拟支付成功
@@ -121,6 +179,23 @@ const Checkout = () => {
           </CardContent>
         </Card>
 
+        {/* 优惠券 */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="text-sm">优惠券</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CouponSelector
+              coupons={availableCoupons}
+              selectedCoupon={selectedCoupon}
+              onCouponSelect={handleCouponSelect}
+              onGenerateCoupon={handleGenerateCoupon}
+              showGenerateOption={showCouponGenerate}
+              orderAmount={order.totalPrice}
+            />
+          </CardContent>
+        </Card>
+
         {/* 支付方式 */}
         <Card className="mb-6">
           <CardHeader>
@@ -158,9 +233,15 @@ const Checkout = () => {
                 <span>运费</span>
                 <span>免费</span>
               </div>
+              {selectedCoupon && (
+                <div className="flex justify-between text-sm text-orange-600">
+                  <span>优惠券折扣 ({selectedCoupon.discountPercent}%)</span>
+                  <span>-¥{selectedCoupon.discountAmount}</span>
+                </div>
+              )}
               <div className="flex justify-between text-lg font-bold border-t pt-2">
                 <span>实付金额</span>
-                <span className="text-red-500">¥{order.totalPrice}</span>
+                <span className="text-red-500">¥{calculateFinalPrice()}</span>
               </div>
             </div>
           </CardContent>
@@ -172,7 +253,7 @@ const Checkout = () => {
           onClick={handlePay}
           disabled={!selectedAddress}
         >
-          立即支付 ¥{order.totalPrice}
+          立即支付 ¥{calculateFinalPrice()}
         </Button>
       </div>
     </div>

@@ -9,6 +9,9 @@ export interface Order {
   userId: string; // 添加用户ID字段
   items: CartItem[];
   totalPrice: number;
+  originalPrice?: number; // 原始价格
+  couponDiscount?: number; // 优惠券折扣金额
+  couponId?: string; // 使用的优惠券ID
   status: '待支付' | '待发货' | '已发货' | '已完成';
   createTime: string;
   paymentMethod?: string;

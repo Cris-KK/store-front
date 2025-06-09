@@ -131,12 +131,18 @@ const Order = () => {
                 <div className="space-y-1 text-xs sm:text-sm">
                   <div className="flex justify-between">
                     <span>商品总价</span>
-                    <span>¥{order.totalPrice}</span>
+                    <span>¥{order.originalPrice || order.totalPrice}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>运费</span>
                     <span>免费</span>
                   </div>
+                  {order.couponDiscount && (
+                    <div className="flex justify-between text-orange-600">
+                      <span>优惠券折扣</span>
+                      <span>-¥{order.couponDiscount}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-base font-bold border-t pt-2">
                     <span>实付金额</span>
                     <span className="text-red-500">¥{order.totalPrice}</span>

@@ -159,7 +159,27 @@ const AdminOrders = () => {
                           )}
                         </div>
                       </TableCell>
-                      <TableCell className="font-medium text-xs md:text-sm">¥{order.totalPrice}</TableCell>
+                      <TableCell>
+                        <div className="font-medium text-xs md:text-sm">
+                          {order.originalPrice && order.couponDiscount ? (
+                            <div className="space-y-1">
+                              <div className="text-gray-500 line-through">
+                                原价: ¥{order.originalPrice}
+                              </div>
+                              <div className="text-green-600 text-xs">
+                                优惠: -¥{order.couponDiscount}
+                              </div>
+                              <div className="text-red-600 font-bold">
+                                实付: ¥{order.totalPrice}
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="text-gray-900">
+                              ¥{order.totalPrice}
+                            </div>
+                          )}
+                        </div>
+                      </TableCell>
                       <TableCell>{getStatusBadge(order.status)}</TableCell>
                       <TableCell className="text-xs md:text-sm text-gray-600">
                         {order.createTime}
