@@ -41,6 +41,19 @@ const defaultProducts: Product[] = [
     rating: 4.5,
     sales: 0
   },
+  {
+    id: 21,
+    name: '破洞牛仔裤时尚欧美',
+    price: 219,
+    originalPrice: 269,
+    image: 'https://cbu01.alicdn.com/img/ibank/O1CN01vBL4KQ1RX0NdRXbEo_!!2212021052120-0-cib.jpg?w=400&h=400&fit=crop',
+    category: '穿搭',
+    stock: 75,
+    status: 'active',
+    description: '这款高弹力修身牛仔裤采用优质面料，舒适透气，版型时尚百搭，适合日常休闲、通勤或出游穿着，男女皆宜，耐磨耐洗，展现自信风采。',
+    rating: 4.7,
+    sales: 0
+  },
   // 美食类
   {
     id: 3,
@@ -70,8 +83,8 @@ const defaultProducts: Product[] = [
   {
     id: 5,
     name: '北欧风桌椅',
-    price: 79,
-    originalPrice: 99,
+    price: 259,
+    originalPrice: 300,
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop',
     category: '居家',
     stock: 120,
@@ -95,8 +108,8 @@ const defaultProducts: Product[] = [
   {
     id: 7,
     name: 'lamer护肤套装',
-    price: 149,
-    originalPrice: 199,
+    price: 3120,
+    originalPrice: 3200,
     image: 'https://imgservice.suning.cn/uimg1/b2c/image/5yTesIS1mYEkNY4YqsOkyQ.jpg',
     category: '美妆',
     stock: 80,
@@ -121,8 +134,8 @@ const defaultProducts: Product[] = [
   {
     id: 9,
     name: 'nike专业跑步鞋',
-    price: 399,
-    originalPrice: 499,
+    price: 699,
+    originalPrice: 899,
     image: "https://pic4.zhimg.com/v2-51e8b7d397d8fc55bb0b262e2dcad682_r.jpg",
     category: '运动',
     stock: 70,
@@ -146,9 +159,9 @@ const defaultProducts: Product[] = [
   {
     id: 11,
     name: '攀山鼠户外登山包',
-    price: 329,
-    originalPrice: 429,
-    image: 'https://th.bing.com/th/id/OIP.WpoukquHmo4gM9Bm9vsAbQHaHa?rs=1&pid=ImgDetMain',
+    price: 1400,
+    originalPrice: 1590,
+    image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7qul9-ljwzbioqwv9pfe',
     category: '户外',
     stock: 40,
     status: 'active',
@@ -214,7 +227,7 @@ const defaultProducts: Product[] = [
     name: '多功能电动牙刷智能清洁',
     price: 199,
     originalPrice: 299,
-    image: 'https://th.bing.com/th/id/OIP.DkNE1Or5bmOjLeuKV4sBmQHaE0?rs=1&pid=ImgDetMain',
+    image: 'https://tse3-mm.cn.bing.net/th/id/OIP-C.cliLqhHs6aAu65XCFK6AGQHaFD?rs=1&pid=ImgDetMain',
     category: '数码',
     stock: 80,
     status: 'active',

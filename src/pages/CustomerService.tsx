@@ -51,12 +51,15 @@ const CustomerService = () => {
         // 调用大模型
         setMessages(prev => [...prev, { role: 'assistant', content: '正在思考中...' }]);
         try {
+            console.log('发送给大模型的消息:', conversation);
             const reply = await callOpenAI(conversation);
+            console.log('大模型回复:', reply);
             setMessages(prev => [
                 ...prev.slice(0, -1),
                 { role: 'assistant', content: reply }
             ]);
         } catch (e) {
+            console.error('客服AI接口调用失败:', e);
             setMessages(prev => [
                 ...prev.slice(0, -1),
                 { role: 'assistant', content: '抱歉，客服暂时无法回复，请稍后再试。' }
